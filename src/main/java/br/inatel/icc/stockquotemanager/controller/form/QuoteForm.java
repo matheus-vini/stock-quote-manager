@@ -8,48 +8,46 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.inatel.icc.stockquotemanager.model.Quote;
-import br.inatel.icc.stockquotemanager.model.StockQuote;
 
 public class QuoteForm {
 
 	@NotNull @NotEmpty
 	private String id;
+	@NotNull @NotEmpty
 	private Map<String, String> quotes;
-	/*
-	@NotNull @NotEmpty
-	private LocalDate date;
-	@NotNull @NotEmpty
-	private BigDecimal value;
-	*/
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String stockId) {
-		this.id = stockId;
-	}
 
 	public Map<String, String> getQuote() {
 		return quotes;
 	}
-
-	public void setQuote(String date, String value) {
-		this.quotes.put(date, value);
+	
+	public String getId() {
+		return id;
 	}
 
-	public StockQuote addQuote(StockQuote stockQuote) {
-		Quote newQuote = null;
-		
+	public Map<String, String> getQuotes() {
+		return quotes;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setQuote(String date, String value) {
+		this.quotes = Map.of(date, value);
+	}
+
+	public Quote addQuote() {
 		for(Map.Entry<String, String> entry : quotes.entrySet())
 		{
+			System.out.println("inside EntrySet");
 			LocalDate date = LocalDate.parse(entry.getKey());
 			BigDecimal value = new BigDecimal(entry.getValue());
-			newQuote = new Quote(date, value);
+			Quote quote = new Quote(date, value, id);
+			
+			return quote;
 		}
 		
-		stockQuote.getListQuotes().add(newQuote);
-		return stockQuote;
+		return null;
 	}
 
 }

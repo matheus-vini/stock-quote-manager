@@ -13,12 +13,21 @@ public class Quote {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String stockId;
 	private LocalDate date;
 	private BigDecimal value;
 
-	public Quote(LocalDate date, BigDecimal value) {
+	public Quote() {
+		
+	}
+	public Quote(LocalDate date, BigDecimal value, String stockId) {
 		this.date = date;
 		this.value = value;
+		this.stockId = stockId;
+	}
+
+	public String getStockId() {
+		return stockId;
 	}
 
 	public Long getId() {

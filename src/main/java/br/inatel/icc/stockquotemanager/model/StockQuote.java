@@ -1,7 +1,9 @@
 package br.inatel.icc.stockquotemanager.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,12 +13,15 @@ public class StockQuote {
 
 	@Id
 	private String stockId;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Quote> listQuotes;
 
+	public StockQuote() {	
+	}
+	
 	public StockQuote(String stockId) {
 		this.stockId = stockId;
-		this.listQuotes = null;
+		this.listQuotes = new ArrayList<Quote>();
 	}
 	
 	public StockQuote(String stockId, List<Quote> listQuotes) {
